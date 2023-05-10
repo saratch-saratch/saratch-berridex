@@ -1,0 +1,30 @@
+.dex-body {
+  padding-top: 4rem;
+  margin: 0;
+}
+
+.dex-header {
+  background-color: aquamarine;
+  display: flex;
+  position: fixed;
+  top: 0;
+  width: 100%;
+  margin-bottom: 2rem;
+  &__heading {
+  }
+}
+
+.dex-nav {
+  &__list {
+    display: flex;
+    list-style: none;
+  }
+  &__item {
+    margin-right: 2rem;
+  }
+}
+
+.dex-footer {
+  background-color: aquamarine;
+  height: 2rem;
+}
