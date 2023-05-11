@@ -44,8 +44,10 @@ const clickEvent = () => {
   });
 };
 
-const displayDex = (num) => {
-  axios.get(`https://pokeapi.co/api/v2/berry?offset=${num}&limit=6`).then((response) => {
+const displayDex = (num, limit) => {
+  let API_URL = `https://pokeapi.co/api/v2/berry?offset=${num}&limit=6`;
+  if (limit !== undefined) API_URL = `https://pokeapi.co/api/v2/berry?offset=${num}&limit=${limit}`;
+  axios.get(API_URL).then((response) => {
     const basket = response.data.results;
     basket.map((element) => {
       axios
@@ -74,11 +76,12 @@ const displayDex = (num) => {
   });
 };
 
-const changePage = (page, num) => {
+const changePage = (page, num, limit) => {
   document.getElementById(page).addEventListener("click", (event) => {
     event.preventDefault();
     removeItems();
-    displayDex(num);
+    if (limit !== undefined) displayDex(num, limit);
+    else displayDex(num);
   });
 };
 
@@ -88,7 +91,7 @@ const changePageAll = () => {
   changePage("page3", 12);
   changePage("page4", 19);
   changePage("page5", 24);
-  changePage("page6", 30);
+  changePage("page6", 30, 5);
 };
 
 const removeItems = () => {
