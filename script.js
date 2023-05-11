@@ -1,14 +1,15 @@
 const API_BASE_URL = "https://pokeapi.co/api/v2/berry";
 const dexList = document.querySelector(".dex-display__list");
+// let berryBasket = [];
 
-const createItem = (berry, berryItem, flavor) => {
+const createItem = (berry) => {
   const newItem = document.createElement("li");
   newItem.setAttribute("id", berry.id);
   newItem.classList.add("dex-item");
 
   const dexImage = document.createElement("img");
   dexImage.classList.add("dex-item__image");
-  dexImage.setAttribute("src", berryItem.sprites.default);
+  dexImage.setAttribute("src", berry.sprite);
   newItem.appendChild(dexImage);
 
   const createText = (text, parent, className) => {
@@ -26,9 +27,9 @@ const createItem = (berry, berryItem, flavor) => {
   wrapper.classList.add("dex-item__wrapper");
   newItem.appendChild(wrapper);
 
-  createText(`Flavor: ${flavor.flavor.name} (${flavor.potency})`, wrapper);
-  createText(`Smooth: ${berry.firmness.name}`, wrapper);
-  createText(berryItem.effect_entries[0].short_effect, wrapper);
+  createText(`Flavor: ${berry.flavor.flavor.name} (${berry.flavor.potency})`, wrapper);
+  createText(`Smooth: ${berry.smooth}`, wrapper);
+  createText(berry.effect, wrapper);
 
   //append to index.html
   dexList.appendChild(newItem);
@@ -45,47 +46,61 @@ const clickEvent = () => {
   });
 };
 
-const displayDex = (num1, num2) => {
-  for (let i = num1; i <= num2; i++) {
-    axios
-      .get(`${API_BASE_URL}/${i}`)
-      .then((response) => {
-        const berry = response.data;
-        axios
-          .get(berry.item.url)
-          .then((response) => {
-            const berryItem = response.data;
-            let flavor = berry.flavors.find((object) => object.potency > 0);
-            createItem(berry, berryItem, flavor);
-            clickEvent();
-          })
-          .catch((error) => console.log(error));
-      })
-      .catch((error) => console.log(error));
-  }
+const displayDex = (num) => {
+  axios.get(`https://pokeapi.co/api/v2/berry?offset=${num}&limit=6`).then((response) => {
+    const basket = response.data.results;
+    basket.map((element) => {
+      axios
+        .get(element.url)
+        .then((response) => {
+          const berry = response.data;
+          axios
+            .get(berry.item.url)
+            .then((response) => {
+              const berryItem = response.data;
+              let berryObject = {
+                sprite: berryItem.sprites.default,
+                name: berry.name,
+                id: berry.id,
+                flavor: berry.flavors.find((object) => object.potency > 0),
+                smooth: berry.firmness.name,
+                effect: berryItem.effect_entries[0].short_effect,
+              };
+              createItem(berryObject);
+              clickEvent();
+            })
+            .catch((error) => console.log(error));
+        })
+        .catch((error) => console.log(error));
+    });
+  });
 };
 
-const changePage = (page, num1, num2) => {
+const changePage = (page, num) => {
   document.getElementById(page).addEventListener("click", (event) => {
     event.preventDefault();
     removeItems();
-    displayDex(num1, num2);
+    displayDex(num);
   });
 };
 
 const changePageAll = () => {
-  changePage("page1", 1, 6);
-  changePage("page2", 7, 12);
-  changePage("page3", 13, 18);
-  changePage("page4", 19, 24);
-  changePage("page5", 25, 30);
-  changePage("page6", 31, 35);
+  changePage("page1", 0);
+  changePage("page2", 6);
+  changePage("page3", 12);
+  changePage("page4", 19);
+  changePage("page5", 24);
+  changePage("page6", 30);
 };
 
 const removeItems = () => {
   const items = document.querySelectorAll(".dex-item");
+  // items.forEach((element) => {
+  //   element.remove();
+  // });
   items.forEach((element) => {
-    element.remove();
+    if (element) element.remove();
+    else return;
   });
 };
 
@@ -102,5 +117,5 @@ const clickNavEvent = () => {
 };
 
 clickNavEvent();
-displayDex(1, 6);
+displayDex(0);
 changePageAll();
