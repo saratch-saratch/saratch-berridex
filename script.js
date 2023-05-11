@@ -1,6 +1,4 @@
-const API_BASE_URL = "https://pokeapi.co/api/v2/berry";
 const dexList = document.querySelector(".dex-display__list");
-// let berryBasket = [];
 
 const createItem = (berry) => {
   const newItem = document.createElement("li");
@@ -95,9 +93,6 @@ const changePageAll = () => {
 
 const removeItems = () => {
   const items = document.querySelectorAll(".dex-item");
-  // items.forEach((element) => {
-  //   element.remove();
-  // });
   items.forEach((element) => {
     if (element) element.remove();
     else return;
