@@ -1,16 +1,99 @@
-.dex-body {
-  padding-top: 4rem;
+@import url("https://fonts.googleapis.com/css2?family=VT323&display=swap");
+
+@mixin tablet {
+  @media screen and (min-width: 768px) {
+    @content;
+  }
+}
+
+@mixin desktop {
+  @media screen and (min-width: 1280px) {
+    @content;
+  }
+}
+
+$green: #7cd1b8;
+$darkgreen: #3e8e7e;
+$lightgreen: #e4f5f0;
+$yellow: #faedc6;
+$darkyellow: #fabb51;
+$red: #9c2952;
+
+* {
+  box-sizing: border-box;
+  padding: 0;
   margin: 0;
+  &::before,
+  &::after {
+    box-sizing: border-box;
+    padding: 0;
+    margin: 0;
+  }
+}
+
+html {
+  font-size: 62.5%;
+}
+
+body,
+p,
+h1,
+h3,
+a {
+  font-family: "VT323", monospace;
+  color: #000;
+  font-size: 1.6rem;
+  line-height: 2rem;
+  cursor: default;
+  @include tablet {
+    font-size: 2rem;
+    line-height: 2.4rem;
+  }
+  @include desktop {
+    font-size: 2.4rem;
+    line-height: 2.8rem;
+  }
+}
+
+a {
+  line-height: 0;
+  display: inline-block;
+  text-decoration: none;
+  &:hover {
+    cursor: pointer;
+    color: $red;
+  }
+}
+
+.dex-body {
+  padding-top: 7rem;
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  @include tablet {
+    padding-top: 8rem;
+  }
 }
 
 .dex-header {
-  background-color: aquamarine;
+  background-color: $green;
   display: flex;
   position: fixed;
+  align-items: center;
+  justify-content: space-between;
   top: 0;
   width: 100%;
-  margin-bottom: 2rem;
+  height: 6rem;
+  padding: 0 2rem;
+  border-bottom: $yellow solid 0.6rem;
+  @include desktop {
+    justify-content: space-around;
+  }
   &__heading {
+    &:hover {
+      cursor: pointer;
+      color: $red;
+    }
   }
 }
 
@@ -18,13 +101,106 @@
   &__list {
     display: flex;
     list-style: none;
+    margin-left: 2rem;
+    padding: 0;
   }
   &__item {
     margin-right: 2rem;
   }
+  &__link {
+    &--active {
+      color: $red;
+    }
+  }
+}
+
+.dex-hero {
+  padding-left: 2rem;
+  padding-bottom: 1rem;
+  @include desktop {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding-left: 0;
+  }
+  &__heading {
+    font-size: 2rem;
+    line-height: 2.4rem;
+    @include tablet {
+      font-size: 2.4rem;
+      line-height: 2.8rem;
+    }
+    @include desktop {
+      font-size: 2.8rem;
+      line-height: 3.2rem;
+    }
+  }
+  &__subheading {
+    color: $darkgreen;
+    font-size: 2rem;
+    @include desktop {
+      font-size: 2.4rem;
+      line-height: 2.8rem;
+    }
+  }
+}
+
+.dex-display {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  flex-grow: 1;
+  &__list {
+    padding: 0;
+    margin: 0;
+    min-width: 32rem;
+    width: 100%;
+    max-width: 42.5rem;
+    list-style: none;
+    @include tablet {
+      width: 80%;
+      max-width: 76.8rem;
+    }
+  }
+}
+
+.dex-item {
+  background-color: $lightgreen;
+  margin: 1rem;
+  border: $yellow solid 0.2rem;
+  border-radius: 0.6rem;
+  padding: 0.8rem;
+  &__wrapper {
+    display: none;
+  }
+  &:hover {
+    .dex-item__wrapper {
+      display: block;
+    }
+  }
+  &--active {
+    background-color: $green;
+    .dex-item__wrapper {
+      display: block;
+    }
+  }
+  &__text {
+    &--alt {
+      text-transform: uppercase;
+    }
+  }
 }
 
 .dex-footer {
-  background-color: aquamarine;
-  height: 2rem;
+  background-color: $green;
+  height: 3rem;
+  margin-top: 2rem;
+  border-top: $yellow solid 0.6rem;
+  @include tablet {
+    height: 4rem;
+  }
+  @include desktop {
+    margin-top: 4rem;
+    height: 5rem;
+  }
 }
