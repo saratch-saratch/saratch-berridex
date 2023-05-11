@@ -114,3 +114,15 @@ const clickNavEvent = () => {
 clickNavEvent();
 displayDex(0);
 changePageAll();
+
+const submitEvent = () => {
+  document.getElementById("dexForm").addEventListener("submit", (event) => {
+    event.preventDefault();
+    const search = event.target.search.value;
+    if (search !== "") {
+      window.location.href = `https://bulbapedia.bulbagarden.net/wiki/index.php?title=Special%3ASearch&search=${search}&go=Go`;
+    }
+  });
+};
+
+submitEvent();

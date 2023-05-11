@@ -107,18 +107,50 @@ a {
 }
 
 .dex-nav {
+  display: flex;
   &__list {
     display: flex;
     list-style: none;
     margin-left: 2rem;
+    align-items: center;
     padding: 0;
-  }
-  &__item {
-    margin-right: 2rem;
+    gap: 2rem;
+    @include desktop {
+      gap: 3rem;
+    }
   }
   &__link {
     &--active {
       color: $red;
+    }
+  }
+}
+
+.dex-form {
+  display: none;
+  @include tablet {
+    margin-left: 4rem;
+    display: flex;
+  }
+  @include desktop {
+    margin-left: 6rem;
+  }
+  &__input {
+    padding: 0.6rem;
+    font-family: "VT323", monospace;
+    border: none;
+    &:focus {
+      outline: none;
+    }
+  }
+  &__submit {
+    margin-left: 0.4rem;
+    width: 4rem;
+    font-family: "VT323", monospace;
+    border: none;
+    background-color: $yellow;
+    &:hover {
+      cursor: pointer;
     }
   }
 }
