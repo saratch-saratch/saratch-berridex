@@ -114,10 +114,6 @@ const clickNavEvent = () => {
   });
 };
 
-clickNavEvent();
-displayDex(0);
-changePageAll();
-
 const submitEvent = () => {
   document.getElementById("dexForm").addEventListener("submit", (event) => {
     event.preventDefault();
@@ -128,4 +124,7 @@ const submitEvent = () => {
   });
 };
 
+clickNavEvent();
 submitEvent();
+displayDex(0);
+changePageAll();

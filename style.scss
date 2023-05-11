@@ -56,9 +56,9 @@ a {
 }
 
 a {
-  line-height: 0;
   display: inline-block;
   text-decoration: none;
+  line-height: 0;
   &:hover {
     cursor: pointer;
     color: $red;
@@ -66,10 +66,10 @@ a {
 }
 
 .dex-body {
-  padding-top: 7rem;
   display: flex;
   flex-direction: column;
   min-height: 100vh;
+  padding-top: 7rem;
   @include tablet {
     padding-top: 8rem;
   }
@@ -111,9 +111,9 @@ a {
   &__list {
     display: flex;
     list-style: none;
-    margin-left: 2rem;
     align-items: center;
     padding: 0;
+    margin-left: 2rem;
     gap: 2rem;
     @include desktop {
       gap: 3rem;
@@ -192,12 +192,12 @@ a {
   align-items: center;
   flex-grow: 1;
   &__list {
-    padding: 0;
-    margin: 0;
+    list-style: none;
     min-width: 32rem;
     width: 100%;
     max-width: 42.5rem;
-    list-style: none;
+    padding: 0;
+    margin: 0;
     @include tablet {
       width: 80%;
       max-width: 76.8rem;
@@ -207,10 +207,10 @@ a {
 
 .dex-item {
   background-color: $lightgreen;
+  padding: 0.8rem;
   margin: 1rem;
   border: $yellow solid 0.2rem;
   border-radius: 0.6rem;
-  padding: 0.8rem;
   &__wrapper {
     display: none;
   }
