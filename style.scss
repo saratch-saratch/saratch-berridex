@@ -89,7 +89,16 @@ a {
   @include desktop {
     justify-content: space-around;
   }
+  &__wrapper {
+    display: flex;
+    align-items: center;
+  }
+  &__wooloo {
+    width: 5rem;
+  }
   &__heading {
+    position: relative;
+    left: -1rem;
     &:hover {
       cursor: pointer;
       color: $red;
